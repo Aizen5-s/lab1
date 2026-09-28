@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mohan Shetty | Fantasy Realm</title>
+    <title>Mohan Shetty | Operator Profile</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap');
 
         * {
             margin: 0;
@@ -20,473 +22,1050 @@
         }
 
         body {
-            min-height: 100vh;
             font-family: 'Poppins', sans-serif;
-            color: #ffffff;
+            color: white;
+            min-height: 100vh;
+
             background:
-                radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.35), transparent 30%),
-                radial-gradient(circle at 80% 30%, rgba(6, 182, 212, 0.25), transparent 30%),
-                radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.25), transparent 35%),
-                linear-gradient(135deg, #09001a, #12002b 45%, #020617);
+                linear-gradient(rgba(4, 6, 15, 0.82), rgba(4, 6, 15, 0.92)),
+                radial-gradient(circle at 15% 20%, #5b21b6, transparent 30%),
+                radial-gradient(circle at 85% 25%, #0891b2, transparent 25%),
+                radial-gradient(circle at 50% 90%, #be185d, transparent 30%),
+                #020617;
+
             overflow-x: hidden;
         }
 
-        /* ---------- Floating Stars ---------- */
+        /* =========================================
+           BACKGROUND GRID
+        ========================================= */
 
-        .stars,
-        .stars::before,
-        .stars::after {
+        body::before {
+            content: "";
             position: fixed;
             inset: 0;
-            content: "";
+
+            background-image:
+                linear-gradient(rgba(34, 211, 238, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.035) 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
         }
 
-        .stars {
-            background-image:
-                radial-gradient(2px 2px at 10% 20%, #fff, transparent),
-                radial-gradient(2px 2px at 25% 70%, #a5f3fc, transparent),
-                radial-gradient(1px 1px at 40% 40%, #fff, transparent),
-                radial-gradient(2px 2px at 60% 15%, #f0abfc, transparent),
-                radial-gradient(1px 1px at 75% 60%, #fff, transparent),
-                radial-gradient(2px 2px at 90% 30%, #67e8f9, transparent),
-                radial-gradient(1px 1px at 85% 85%, #fff, transparent),
-                radial-gradient(2px 2px at 15% 90%, #e879f9, transparent);
-            background-size: 350px 350px;
-            animation: starsMove 25s linear infinite;
-            opacity: 0.7;
-        }
-
-        .stars::before {
-            background-image:
-                radial-gradient(1px 1px at 30% 30%, #fff, transparent),
-                radial-gradient(2px 2px at 70% 20%, #c084fc, transparent),
-                radial-gradient(1px 1px at 55% 80%, #67e8f9, transparent);
-            background-size: 500px 500px;
-            animation: starsMove 40s linear infinite reverse;
-        }
-
-        @keyframes starsMove {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-350px);
-            }
-        }
-
-        /* ---------- Main Container ---------- */
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
 
         .container {
-            position: relative;
-            z-index: 1;
             width: 92%;
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 60px 50px;
-            text-align: center;
+            max-width: 1100px;
 
-            background: rgba(15, 8, 35, 0.68);
-            border: 1px solid rgba(216, 180, 254, 0.25);
-            border-radius: 30px;
+            margin: 40px auto;
+            padding: 45px;
 
-            backdrop-filter: blur(18px);
+            background: rgba(2, 6, 23, 0.72);
+
+            border: 1px solid rgba(34, 211, 238, 0.22);
+
+            clip-path: polygon(
+                0 18px,
+                18px 0,
+                calc(100% - 18px) 0,
+                100% 18px,
+                100% calc(100% - 18px),
+                calc(100% - 18px) 100%,
+                18px 100%,
+                0 calc(100% - 18px)
+            );
 
             box-shadow:
-                0 0 40px rgba(168, 85, 247, 0.15),
-                inset 0 0 50px rgba(34, 211, 238, 0.03);
+                0 0 40px rgba(6, 182, 212, 0.08),
+                inset 0 0 80px rgba(124, 58, 237, 0.05);
+
+            backdrop-filter: blur(12px);
         }
 
-        /* ---------- Magical Orb ---------- */
+        /* =========================================
+           TOP HUD
+        ========================================= */
 
-        .profile {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 30px;
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding-bottom: 20px;
+            margin-bottom: 35px;
+
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+
+            color: #67e8f9;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
 
             border-radius: 50%;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #22c55e;
 
-            font-family: 'Cinzel', serif;
-            font-size: 45px;
-            font-weight: bold;
-            color: white;
+            box-shadow:
+                0 0 8px #22c55e,
+                0 0 15px #22c55e;
+
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        /* =========================================
+           PROFILE
+        ========================================= */
+
+        .profile-container {
+            text-align: center;
+        }
+
+        .profile {
+            position: relative;
+
+            width: 190px;
+            height: 190px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
 
             background:
                 radial-gradient(circle at 30% 25%, #f0abfc, transparent 20%),
-                linear-gradient(135deg, #7c3aed, #db2777, #0891b2);
+                linear-gradient(
+                    135deg,
+                    #4c1d95,
+                    #be185d,
+                    #0891b2
+                );
 
-            border: 3px solid rgba(255, 255, 255, 0.5);
+            border: 3px solid rgba(103, 232, 249, 0.7);
+
+            clip-path: polygon(
+                15% 0,
+                85% 0,
+                100% 15%,
+                100% 85%,
+                85% 100%,
+                15% 100%,
+                0 85%,
+                0 15%
+            );
 
             box-shadow:
-                0 0 20px #a855f7,
-                0 0 50px rgba(217, 70, 239, 0.6),
-                0 0 90px rgba(34, 211, 238, 0.25);
-
-            animation: orbFloat 4s ease-in-out infinite;
+                0 0 20px rgba(168, 85, 247, 0.8),
+                0 0 50px rgba(6, 182, 212, 0.25);
         }
 
         .profile::before {
             content: "";
+
             position: absolute;
-            inset: -12px;
-            border: 1px solid rgba(103, 232, 249, 0.6);
-            border-radius: 50%;
-            animation: rotateRing 8s linear infinite;
+            inset: 10px;
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+
+            clip-path: inherit;
         }
 
-        .profile::after {
-            content: "✦";
-            position: absolute;
-            top: -18px;
-            right: 2px;
-            color: #67e8f9;
-            font-size: 22px;
-            animation: sparkle 1.5s infinite alternate;
+        .rank {
+            margin-top: 18px;
+
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+
+            color: #f0abfc;
         }
 
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
+        /* =========================================
+           HERO TEXT
+        ========================================= */
 
-            50% {
-                transform: translateY(-10px);
-            }
-        }
+        .hero-text h1 {
+            font-family: 'Orbitron', sans-serif;
 
-        @keyframes rotateRing {
-            from {
-                transform: rotate(0deg);
-            }
+            font-size: clamp(38px, 6vw, 65px);
 
-            to {
-                transform: rotate(360deg);
-            }
-        }
+            letter-spacing: 4px;
 
-        @keyframes sparkle {
-            from {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-
-        /* ---------- Typography ---------- */
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(42px, 7vw, 70px);
-            letter-spacing: 3px;
-
-            background: linear-gradient(
-                90deg,
-                #f0abfc,
-                #c084fc,
-                #67e8f9,
-                #f9a8d4
-            );
-
-            background-size: 300%;
+            background:
+                linear-gradient(
+                    90deg,
+                    #67e8f9,
+                    #c084fc,
+                    #f472b6
+                );
 
             -webkit-background-clip: text;
             background-clip: text;
+
             color: transparent;
-
-            animation: magicalText 6s ease infinite;
         }
 
-        @keyframes magicalText {
-            0%, 100% {
-                background-position: 0%;
-            }
+        .cod-line {
+            margin-top: 8px;
 
-            50% {
-                background-position: 100%;
-            }
+            color: #94a3b8;
+
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 13px;
+            letter-spacing: 3px;
         }
 
-        .subtitle {
-            margin-top: 10px;
-            color: #c4b5fd;
-            font-size: 17px;
-            letter-spacing: 1px;
-        }
+        .description {
+            margin-top: 25px;
 
-        .about {
-            max-width: 700px;
-            margin: 40px auto 0;
-            color: #ddd6fe;
+            max-width: 650px;
+
             line-height: 1.9;
-            font-size: 16px;
+
+            color: #cbd5e1;
+
+            font-size: 15px;
         }
 
-        .about p + p {
-            margin-top: 18px;
-            color: #a5f3fc;
+        .tag {
+            display: inline-block;
+
+            margin-top: 20px;
+            margin-right: 7px;
+
+            padding: 7px 12px;
+
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 9px;
+            letter-spacing: 1px;
+
+            color: #67e8f9;
+
+            border: 1px solid rgba(34, 211, 238, 0.3);
+
+            background: rgba(34, 211, 238, 0.06);
         }
 
-        /* ---------- Section Title ---------- */
+        /* =========================================
+           SECTION
+        ========================================= */
 
-        .section-title {
-            margin-top: 55px;
+        .section {
+            margin-top: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
             margin-bottom: 25px;
 
-            font-family: 'Cinzel', serif;
-            font-size: 25px;
+            font-family: 'Orbitron', sans-serif;
+
             color: #f0abfc;
 
-            text-shadow:
-                0 0 10px rgba(232, 121, 249, 0.8);
+            font-size: 16px;
+            letter-spacing: 3px;
         }
 
-        .section-title::before,
-        .section-title::after {
-            content: " ✦ ";
+        .section-header::after {
+            content: "";
+
+            height: 1px;
+            flex: 1;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(168, 85, 247, 0.5),
+                    transparent
+                );
+        }
+
+        /* =========================================
+           STAT GRID
+        ========================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .stat {
+            padding: 22px;
+
+            background: rgba(15, 23, 42, 0.7);
+
+            border: 1px solid rgba(148, 163, 184, 0.15);
+
+            transition: 0.3s;
+        }
+
+        .stat:hover {
+            border-color: #22d3ee;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 0 20px rgba(34, 211, 238, 0.08);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 25px;
+
             color: #67e8f9;
         }
 
-        /* ---------- Cards ---------- */
+        .stat-label {
+            margin-top: 6px;
 
-        .cards {
+            font-size: 11px;
+
+            color: #64748b;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           LOADOUT
+        ========================================= */
+
+        .loadout {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+
             gap: 18px;
-            margin-top: 25px;
         }
 
         .card {
             position: relative;
-            padding: 30px 18px;
+
+            padding: 28px 20px;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(124, 58, 237, 0.16),
-                    rgba(8, 145, 178, 0.08)
+                    rgba(76, 29, 149, 0.16),
+                    rgba(8, 145, 178, 0.05)
                 );
 
-            border: 1px solid rgba(196, 181, 253, 0.2);
-            border-radius: 20px;
+            border: 1px solid rgba(196, 181, 253, 0.18);
 
-            transition:
-                transform 0.35s ease,
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
+            transition: 0.35s;
 
             overflow: hidden;
         }
 
         .card::before {
             content: "";
+
             position: absolute;
-            width: 100px;
-            height: 100px;
-            background: #a855f7;
-            filter: blur(70px);
-            opacity: 0;
-            transition: 0.4s;
+
+            top: 0;
+            left: 0;
+
+            width: 3px;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    #22d3ee,
+                    #a855f7,
+                    #ec4899
+                );
         }
 
         .card:hover {
-            transform: translateY(-10px) scale(1.03);
+            transform: translateY(-8px);
 
-            border-color: rgba(103, 232, 249, 0.7);
+            border-color: rgba(34, 211, 238, 0.6);
 
             box-shadow:
-                0 10px 30px rgba(124, 58, 237, 0.25),
-                0 0 25px rgba(34, 211, 238, 0.12);
-        }
-
-        .card:hover::before {
-            opacity: 0.5;
+                0 10px 35px rgba(124, 58, 237, 0.15);
         }
 
         .icon {
-            font-size: 42px;
+            font-size: 38px;
+
             margin-bottom: 15px;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+
+            filter:
+                drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
         }
 
         .card h3 {
-            font-family: 'Cinzel', serif;
-            color: #f5d0fe;
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            color: #f0abfc;
+
             margin-bottom: 10px;
         }
 
         .card p {
-            color: #a5b4fc;
-            font-size: 13px;
-            line-height: 1.6;
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.7;
         }
 
-        /* ---------- Quote ---------- */
+        /* =========================================
+           MISSION
+        ========================================= */
+
+        .mission {
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(124, 58, 237, 0.12),
+                    rgba(6, 182, 212, 0.06)
+                );
+
+            border: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        .mission-title {
+            display: flex;
+            justify-content: space-between;
+
+            font-family: 'Orbitron', sans-serif;
+
+            color: #67e8f9;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+        }
+
+        .mission p {
+            margin-top: 15px;
+
+            color: #cbd5e1;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 5px;
+
+            margin-top: 20px;
+
+            background: #1e293b;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 68%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c3aed,
+                    #22d3ee
+                );
+
+            box-shadow: 0 0 10px #22d3ee;
+        }
+
+        /* =========================================
+           FAVORITE GAME
+        ========================================= */
+
+        .game-box {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(127, 29, 29, 0.18),
+                    rgba(30, 41, 59, 0.5)
+                );
+
+            border: 1px solid rgba(248, 113, 113, 0.2);
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 25px;
+
+            color: #f87171;
+
+            letter-spacing: 2px;
+        }
+
+        .game-box p {
+            margin-top: 12px;
+
+            color: #94a3b8;
+
+            line-height: 1.8;
+
+            font-size: 13px;
+        }
+
+        .game-list {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+        .game-item {
+            padding: 12px;
+
+            border-left: 2px solid #f87171;
+
+            background: rgba(15, 23, 42, 0.7);
+
+            color: #cbd5e1;
+
+            font-size: 11px;
+        }
+
+        /* =========================================
+           QUOTE
+        ========================================= */
 
         .quote {
-            position: relative;
-            margin: 55px auto 0;
-            max-width: 650px;
+            margin-top: 60px;
 
-            padding: 25px;
+            text-align: center;
 
-            color: #c4b5fd;
-            font-family: 'Cinzel', serif;
-            font-size: 15px;
-            font-style: italic;
+            font-family: 'Orbitron', sans-serif;
 
-            border-top: 1px solid rgba(192, 132, 252, 0.3);
-            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+            font-size: 14px;
+
+            line-height: 2;
+
+            color: #a5b4fc;
+
+            letter-spacing: 1px;
         }
 
-        /* ---------- Footer ---------- */
+        /* =========================================
+           FOOTER
+        ========================================= */
 
         footer {
-            margin-top: 35px;
-            color: #64748b;
-            font-size: 12px;
+            margin-top: 45px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+
+            text-align: center;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            color: #475569;
         }
 
-        /* ---------- Mobile ---------- */
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
 
         @media (max-width: 850px) {
-            .cards {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .stats,
+            .loadout {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .game-box {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 600px) {
+
             .container {
-                padding: 40px 20px;
-                margin: 25px auto;
+                padding: 30px 20px;
             }
 
-            .profile {
-                width: 120px;
-                height: 120px;
-                font-size: 36px;
+            .hud {
+                font-size: 8px;
             }
 
-            .cards {
+            .stats,
+            .loadout {
                 grid-template-columns: 1fr;
             }
 
-            .subtitle {
-                font-size: 14px;
+            .profile {
+                width: 150px;
+                height: 150px;
             }
 
-            .about {
-                font-size: 14px;
+            .game-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
             }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="stars"></div>
-
     <main class="container">
 
-        <!-- Magical Profile Orb -->
-        <div class="profile">
-            MS
+        <!-- ==============================
+             HUD
+        =============================== -->
+
+        <div class="hud">
+
+            <div>
+                OPERATOR PROFILE // MS-001
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                ONLINE
+            </div>
+
         </div>
 
-        <h1>Mohan Shetty</h1>
 
-        <p class="subtitle">
-            ✦ Engineering Student • Gamer • Programmer • Anime Fan ✦
-        </p>
+        <!-- ==============================
+             HERO
+        =============================== -->
 
-        <!-- About -->
-        <section class="about">
+        <section class="hero">
 
-            <p>
-                Welcome, traveler. I'm <strong>Mohan Shetty</strong>,
-                currently pursuing my Engineering Degree.
-                I enjoy playing games, watching anime,
-                exploring technology, and learning programming.
-            </p>
+            <div class="profile-container">
 
-            <p>
-                I'm still discovering my path, learning one skill at a time,
-                and creating my own little realm in the digital world.
-            </p>
+                <div class="profile">
+                    MS
+                </div>
 
-        </section>
+                <div class="rank">
+                    DIGITAL EXPLORER
+                </div>
 
-        <h2 class="section-title">
-            My Realm
-        </h2>
-
-        <!-- Hobby Cards -->
-        <section class="cards">
-
-            <div class="card">
-                <div class="icon">🎓</div>
-
-                <h3>Engineering</h3>
-
-                <p>
-                    Currently pursuing my Engineering Degree
-                    and exploring the world of technology.
-                </p>
             </div>
 
-            <div class="card">
-                <div class="icon">🎮</div>
 
-                <h3>Gaming</h3>
+            <div class="hero-text">
 
-                <p>
-                    Entering different worlds, taking on quests,
-                    and enjoying adventures through games.
+                <h1>MOHAN SHETTY</h1>
+
+                <div class="cod-line">
+                    ENGINEERING STUDENT // GAMER // PROGRAMMER
+                </div>
+
+                <p class="description">
+                    Welcome to my digital profile.
+                    I'm Mohan Shetty, an Engineering student who enjoys
+                    gaming, anime, technology, and learning programming.
+                    I spend my time exploring virtual worlds while slowly
+                    building my skills in the real one.
                 </p>
-            </div>
 
-            <div class="card">
-                <div class="icon">⚔️</div>
+                <span class="tag">ENGINEERING</span>
+                <span class="tag">GAMING</span>
+                <span class="tag">PROGRAMMING</span>
+                <span class="tag">ANIME</span>
 
-                <h3>Programming</h3>
-
-                <p>
-                    Learning programming fundamentals and
-                    slowly forging my skills like a digital warrior.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🌸</div>
-
-                <h3>Anime</h3>
-
-                <p>
-                    Exploring different anime worlds,
-                    stories, characters, and unforgettable adventures.
-                </p>
             </div>
 
         </section>
 
-        <p class="quote">
-            "Every world has a story. I'm still writing mine."
-        </p>
+
+        <!-- ==============================
+             STATS
+        =============================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+                PLAYER DATA
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-number">01</div>
+                    <div class="stat-label">ENGINEERING JOURNEY</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">CURIOSITY</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">GAMING ENERGY</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">LVL ?</div>
+                    <div class="stat-label">LIFE EXPERIENCE</div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             LOADOUT
+        =============================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+                CURRENT LOADOUT
+            </div>
+
+
+            <div class="loadout">
+
+                <div class="card">
+
+                    <div class="icon">🎓</div>
+
+                    <h3>ENGINEERING</h3>
+
+                    <p>
+                        Currently pursuing my Engineering Degree
+                        and learning how technology works.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">💻</div>
+
+                    <h3>PROGRAMMING</h3>
+
+                    <p>
+                        I know the basics of programming and I'm
+                        working toward improving my technical skills.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🎮</div>
+
+                    <h3>GAMING</h3>
+
+                    <p>
+                        Games are my escape into different worlds.
+                        FPS and action games are especially interesting to me.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🌸</div>
+
+                    <h3>ANIME</h3>
+
+                    <p>
+                        Anime is another way I explore different
+                        characters, stories, worlds and adventures.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             CURRENT MISSION
+        =============================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+                CURRENT MISSION
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-title">
+
+                    <span>
+                        MISSION: BECOME BETTER
+                    </span>
+
+                    <span>
+                        ACTIVE
+                    </span>
+
+                </div>
+
+                <p>
+                    My current mission is simple:
+                    complete my Engineering journey, improve my programming
+                    skills, discover new technologies, and figure out where
+                    I want to go next.
+                </p>
+
+                <div class="progress">
+
+                    <div class="progress-bar"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             CALL OF DUTY
+        =============================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+                FAVORITE GAMING ZONE
+            </div>
+
+
+            <div class="game-box">
+
+                <div>
+
+                    <div class="game-title">
+                        CALL OF DUTY
+                    </div>
+
+                    <p>
+                        One of the gaming experiences I enjoy.
+                        I like the fast-paced gameplay, competitive
+                        atmosphere, maps, loadouts and the feeling
+                        of jumping into another match.
+                    </p>
+
+                </div>
+
+
+                <div class="game-list">
+
+                    <div class="game-item">
+                        🎯 FPS
+                    </div>
+
+                    <div class="game-item">
+                        ⚡ FAST-PACED
+                    </div>
+
+                    <div class="game-item">
+                        🎮 MULTIPLAYER
+                    </div>
+
+                    <div class="game-item">
+                        🔥 ACTION
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             PERSONALITY
+        =============================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+                PERSONAL PROFILE
+            </div>
+
+
+            <div class="loadout">
+
+                <div class="card">
+
+                    <div class="icon">🌌</div>
+
+                    <h3>PRIVATE SPACE</h3>
+
+                    <p>
+                        I enjoy having my own space, spending time with
+                        the things I like and getting away from the noise
+                        of everyday life.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🧠</div>
+
+                    <h3>CURIOUS MIND</h3>
+
+                    <p>
+                        I like discovering how things work and learning
+                        new concepts whenever something catches my interest.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🎧</div>
+
+                    <h3>MY OWN WORLD</h3>
+
+                    <p>
+                        Games, anime, music and technology give me
+                        different worlds to explore in my own way.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">⚔️</div>
+
+                    <h3>KEEP MOVING</h3>
+
+                    <p>
+                        I may not have everything figured out yet,
+                        but I'm still learning and moving forward.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             QUOTE
+        =============================== -->
+
+        <div class="quote">
+
+            "No map. No fixed destination.<br>
+            Just another mission waiting to begin."
+
+        </div>
+
+
+        <!-- ==============================
+             FOOTER
+        =============================== -->
 
         <footer>
-            ✦ © 2026 Mohan Shetty • Welcome to my realm ✦
+
+            MS-001 // MOHAN SHETTY //
+            DIGITAL OPERATOR PROFILE //
+            2026
+
         </footer>
 
     </main>
 
 </body>
+
 </html>
